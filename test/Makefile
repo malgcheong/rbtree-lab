@@ -1,15 +1,26 @@
 .PHONY: test
 
+# c 컴파일러 옵션
 CFLAGS=-I ../src -Wall -g #-DSENTINEL
 
-test: test-rbtree
-	./test-rbtree
-	valgrind ./test-rbtree
+# 생성하고자 하는 실행 파일 이름
+Target = test
 
-test-rbtree: test-rbtree.o ../src/rbtree.o
+Target_src = rbtree
+# Target_src = bst
 
-../src/rbtree.o:
-	$(MAKE) -C ../src rbtree.o
+Target_test = test-rbtree
+# Target_test = test-bst
+
+
+$(Target): $(Target_test)
+	./$(Target_test)
+	valgrind ./$(Target_test)
+
+$(Target_test): $(Target_test).o ../src/$(Target_src).o
+
+../src/$(Target_src).o:
+	$(MAKE) -C ../src $(Target_src).o
 
 clean:
-	rm -f test-rbtree *.o
+	rm -f $(Target_test) *.o
