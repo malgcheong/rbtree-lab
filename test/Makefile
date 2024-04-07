@@ -1,17 +1,18 @@
 .PHONY: test
 
 # c 컴파일러 옵션
-CFLAGS=-I ../src -Wall -g #-DSENTINEL
+CFLAGS= -I ../src -Wall -g #-DSENTINEL
 
 # 생성하고자 하는 실행 파일 이름
 Target = test
 
-Target_src = rbtree
-# Target_src = bst
+# bst 테스트
+Target_src = bst
+Target_test = test-bst
 
-Target_test = test-rbtree
-# Target_test = test-bst
-
+# rbtree 테스트
+# Target_src = rbtree
+# Target_test = test-rbtree
 
 $(Target): $(Target_test)
 	./$(Target_test)
