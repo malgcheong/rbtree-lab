@@ -1,7 +1,7 @@
 #ifndef _RBTREE_H_
 #define _RBTREE_H_
-
 #include <stddef.h>
+// #define SENTINEL
 
 typedef enum { RBTREE_RED, RBTREE_BLACK } color_t;
 
@@ -31,13 +31,16 @@ void rbtree_insert_fixup(rbtree *, node_t *);
 void rbtree_left_rotate(rbtree * t, node_t * z);
 void rbtree_right_rotate(rbtree * t, node_t * z);
 
-
-
-
 node_t *rbtree_find(const rbtree *, const key_t);
 node_t *rbtree_min(const rbtree *);
 node_t *rbtree_max(const rbtree *);
-int rbtree_erase(rbtree *, node_t *);
+
+void rbtree_delete_fixup(rbtree *t, node_t *z);
+void rbtree_erase(rbtree *, node_t *);
+void rbtree_transplant(rbtree *, node_t *, node_t *);
+node_t *bst_min(const rbtree *t, node_t *z);
+void bst_inorderTraversal(const rbtree *t);
+void bst_inorderTraversal_recursive(const rbtree *t, node_t *root);
 
 int rbtree_to_array(const rbtree *, key_t *, const size_t);
 

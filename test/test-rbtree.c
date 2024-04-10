@@ -281,7 +281,7 @@ void test_rb_constraints(const key_t arr[], const size_t n) {
 
 // rbtree should manage distinct values
 void test_distinct_values() {
-  const key_t entries[] = {10, 5, 8, 34, 67, 23, 156, 24, 2, 12};
+  const key_t entries[] = {10, 5, 8, 34, 67, 23, 156, 24, 2, 12};  
   const size_t n = sizeof(entries) / sizeof(entries[0]);
   test_rb_constraints(entries, n);
 }
@@ -315,13 +315,16 @@ void test_find_erase(rbtree *t, const key_t *arr, const size_t n) {
     node_t *p = rbtree_insert(t, arr[i]);
     assert(p != NULL);
   }
+  // printf("original\n");
+  // bst_inorderTraversal(t);
 
   for (int i = 0; i < n; i++) {
     node_t *p = rbtree_find(t, arr[i]);
-    // printf("arr[%d] = %d\n", i, arr[i]);
     assert(p != NULL);
-    assert(p->key == arr[i]);
+    assert( p->key == arr[i]);
+    // printf("arr[%d] = %d\n", i, arr[i]);
     rbtree_erase(t, p);
+    // bst_inorderTraversal(t);
   }
 
   for (int i = 0; i < n; i++) {
@@ -368,16 +371,16 @@ void test_find_erase_rand(const size_t n, const unsigned int seed) {
 }
 
 int main(void) {
-  test_init(); //success
-  test_insert_single(1024); //success
-  test_find_single(512, 1024); //success
-  // test_erase_root(128); //not yet
-  // test_find_erase_fixed(); //not yet
-  // test_minmax_suite(); //not yet
-  // test_to_array_suite(); //not yet
-  test_distinct_values(); //success
-  test_duplicate_values(); //success
-  // test_multi_instance(); //not yet
-  // test_find_erase_rand(10000, 17); //not yet
+  test_init(); // init
+  test_insert_single(1024); // insert
+  test_find_single(512, 1024); // insert
+  test_erase_root(128); // delete
+  test_find_erase_fixed(); // delete
+  test_minmax_suite(); // delete 
+  test_to_array_suite(); // insert
+  test_distinct_values(); // insert
+  test_duplicate_values(); // insert
+  test_multi_instance(); // delete
+  test_find_erase_rand(10000, 17); // delete
   printf("Passed all tests!\n");
 }
